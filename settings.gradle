@@ -1,2 +1,3 @@
 rootProject.name='GPC Endpoint'
 include ':app'
+include ':backend'
