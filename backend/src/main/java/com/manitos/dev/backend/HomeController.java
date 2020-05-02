@@ -3,6 +3,7 @@ package com.manitos.dev.backend;
 import com.google.api.server.spi.config.Api;
 import com.google.api.server.spi.config.ApiMethod;
 import com.google.api.server.spi.config.ApiNamespace;
+import com.manitos.dev.datalib.JokesProvider;
 
 import javax.inject.Named;
 
@@ -23,6 +24,15 @@ public class HomeController {
     public MyBean sayHi(@Named("name") String name) {
         MyBean response = new MyBean();
         response.setData("Awesome, " + name + " it's work!");
+
+        return response;
+    }
+
+    @ApiMethod(name = "getRandomJoke")
+    public MyBean getRandomJoke() {
+        MyBean response = new MyBean();
+
+        response.setData(new JokesProvider().getJoke());
 
         return response;
     }

@@ -28,6 +28,9 @@ sourceCompatibility = JavaVersion.VERSION_1_8
 targetCompatibility = JavaVersion.VERSION_1_8
 
 dependencies {
+
+    implementation project(":data-lib")
+
     implementation 'com.google.endpoints:endpoints-framework:2.0.10'
     implementation 'com.google.appengine:appengine-api-1.0-sdk:1.9.59'
     implementation 'javax.inject:javax.inject:1'
