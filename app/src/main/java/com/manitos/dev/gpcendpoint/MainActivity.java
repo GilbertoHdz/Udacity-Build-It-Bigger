@@ -11,9 +11,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manitos.dev.gpcendpoint.api.JokeServiceAsyncTask;
 import com.manitos.dev.gpcendpoint.api.network.InternetCheck;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements JokeServiceAsyncTask.JokeValueFetcherListener {
 
     private ProgressBar _loader;
     private TextView _error_message;
@@ -64,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             public void accept(Boolean internet) {
                 if (internet) {
                     // Calling joke api services
+                    JokeServiceAsyncTask endpointsAsyncTask = new JokeServiceAsyncTask(MainActivity.this);
+                    endpointsAsyncTask.start(MainActivity.this);
                 } else {
                     showErrorMessage(R.string.error_network_message);
                 }
@@ -71,13 +74,22 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+    @Override
+    public void onJokeValue(JokeServiceAsyncTask.Result jokeResult) {
+        Log.i("SERVICE_JOKE", jokeResult.jokeValue + "");
 
+        if (jokeResult.jokeValue != null) {
+            openJokeDetailScreen(jokeResult.jokeValue);
+        } else {
+            showErrorMessage(R.string.error_message);
+        }
+    }
 
-
-    private void openJokeDetailScreen() {
+    private void openJokeDetailScreen(String value) {
         _loader.setVisibility(View.GONE);
-        _error_message.setVisibility(View.GONE);
+        // _error_message.setVisibility(View.GONE);
         // TODO IMPLEMENT ACTIVITY JOKE DETAIL
+        _error_message.setText(value);
     }
 
     private void showErrorMessage(int resMsgId) {
