@@ -1,0 +1,2 @@
+rootProject.name='GPC Endpoint'
+include ':app'
