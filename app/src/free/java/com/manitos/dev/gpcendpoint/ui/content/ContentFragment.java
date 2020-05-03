@@ -1,4 +1,4 @@
-package com.manitos.dev.gpcendpoint.ui;
+package com.manitos.dev.gpcendpoint.ui.content;
 
 import android.os.Bundle;
 
@@ -12,18 +12,23 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.manitos.dev.gpcendpoint.R;
 
+public class ContentFragment extends Fragment {
 
-/**
- * A placeholder fragment containing a simple view.
- */
-public class MainActivityFragment extends Fragment {
-    public MainActivityFragment() {
+    public ContentFragment() {
+        // Required empty public constructor
+    }
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View root = inflater.inflate(R.layout.fragment_main_activity, container, false);
+        // Inflate the layout for this fragment
+        View root = inflater.inflate(R.layout.fragment_content, container, false);
 
         AdView mAdView = (AdView) root.findViewById(R.id.adView);
         // Create an ad request. Check logcat output for the hashed device ID to
