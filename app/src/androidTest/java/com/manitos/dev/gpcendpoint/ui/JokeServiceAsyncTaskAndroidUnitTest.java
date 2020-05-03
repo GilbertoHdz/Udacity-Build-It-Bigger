@@ -22,7 +22,7 @@ public class JokeServiceAsyncTaskAndroidUnitTest implements JokeServiceAsyncTask
 
     private static String jokeTextResult;
     private static boolean called;
-    private CountDownLatch signal = new CountDownLatch(1);
+    private CountDownLatch signal;
 
     /**
      * The ActivityTestRule is a rule provided by Android used for functional testing of a single
