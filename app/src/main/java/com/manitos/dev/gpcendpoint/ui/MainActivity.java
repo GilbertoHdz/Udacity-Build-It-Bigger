@@ -1,7 +1,8 @@
-package com.manitos.dev.gpcendpoint;
+package com.manitos.dev.gpcendpoint.ui;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
@@ -11,8 +12,10 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.manitos.dev.gpcendpoint.R;
 import com.manitos.dev.gpcendpoint.api.JokeServiceAsyncTask;
 import com.manitos.dev.gpcendpoint.api.network.InternetCheck;
+import com.manitos.dev.jokedetail.JokeDetailActivity;
 
 public class MainActivity extends AppCompatActivity implements JokeServiceAsyncTask.JokeValueFetcherListener {
 
@@ -87,9 +90,11 @@ public class MainActivity extends AppCompatActivity implements JokeServiceAsyncT
 
     private void openJokeDetailScreen(String value) {
         _loader.setVisibility(View.GONE);
-        // _error_message.setVisibility(View.GONE);
-        // TODO IMPLEMENT ACTIVITY JOKE DETAIL
-        _error_message.setText(value);
+        _error_message.setVisibility(View.GONE);
+
+        Intent intent = new Intent(this, JokeDetailActivity.class);
+        intent.putExtra(JokeDetailActivity.KEY_JOKE_GCP_RESULT, value);
+        this.startActivity(intent);
     }
 
     private void showErrorMessage(int resMsgId) {

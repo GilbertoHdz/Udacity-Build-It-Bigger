@@ -5,7 +5,7 @@
     android:layout_width="match_parent">
 
     <fragment android:id="@+id/fragment"
-        android:name="com.manitos.dev.gpcendpoint.MainActivityFragment"
+        android:name="com.manitos.dev.gpcendpoint.ui.MainActivityFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:layout="@layout/fragment_main_activity" />

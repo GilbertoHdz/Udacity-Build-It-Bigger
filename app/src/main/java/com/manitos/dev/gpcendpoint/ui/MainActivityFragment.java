@@ -1,4 +1,4 @@
-package com.manitos.dev.gpcendpoint;
+package com.manitos.dev.gpcendpoint.ui;
 
 import android.os.Bundle;
 
@@ -10,6 +10,7 @@ import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.manitos.dev.gpcendpoint.R;
 
 
 /**

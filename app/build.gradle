@@ -47,10 +47,15 @@ android {
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
+    // Include Backend services
     endpointsServer project(path: ':backend', configuration: 'endpoints')
     implementation 'com.google.api-client:google-api-client:1.30.9'
     implementation 'com.google.http-client:google-http-client-android:1.23.0'
 
+    // Include features
+    implementation project(":joke-detail")
+
+    // Android libraries
     implementation 'androidx.appcompat:appcompat:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
