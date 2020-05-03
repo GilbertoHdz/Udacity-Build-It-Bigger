@@ -10,21 +10,20 @@ import org.junit.runners.JUnit4;
 import org.mockito.Mock;
 import org.mockito.MockitoAnnotations;
 
-import java.util.concurrent.ExecutionException;
+import java.util.concurrent.CountDownLatch;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
 
 /**
  * Created by gilberto hdz on 02/05/20.
  */
 @RunWith(JUnit4.class)
-public class JokeServiceAsyncTaskUnitTest {
+public class JokeServiceAsyncTaskUnitTest implements JokeServiceAsyncTask.JokeValueFetcherListener {
 
-    @Mock
+    private static String jokeTextResult;
+    private static boolean called;
+    private CountDownLatch signal;
+
     JokeServiceAsyncTask mockJokeServiceAsyncTask;
-
-    @Mock
-    JokeServiceAsyncTask.JokeValueFetcherListener jokeValueFetcherListener;
 
     @Mock
     Context mCtx = null;
@@ -32,16 +31,26 @@ public class JokeServiceAsyncTaskUnitTest {
     @Before
     public void setup() {
         MockitoAnnotations.initMocks(this);
-
-        mockJokeServiceAsyncTask = new JokeServiceAsyncTask(jokeValueFetcherListener);
+        signal = new CountDownLatch(1);
     }
 
     @Test
-    public void testAsyncTask() throws InterruptedException, ExecutionException, TimeoutException {
+    public void testRetrieveJokeTaskLocal() throws Exception {
+        // Assign
+        mockJokeServiceAsyncTask = new JokeServiceAsyncTask(this);
+
+        // Action
         mockJokeServiceAsyncTask.start(mCtx);
 
-        JokeServiceAsyncTask.Result joke = mockJokeServiceAsyncTask.get(5, TimeUnit.SECONDS);
+        // Assert
+        Assert.assertNotNull(jokeTextResult);
+        Assert.assertFalse(jokeTextResult.isEmpty());
+    }
 
-        Assert.assertTrue(joke == null);
+    @Override
+    public void onJokeValue(JokeServiceAsyncTask.Result jokeResult) {
+        called = true;
+        jokeTextResult = jokeResult.jokeValue;
+        signal.countDown();
     }
 }
