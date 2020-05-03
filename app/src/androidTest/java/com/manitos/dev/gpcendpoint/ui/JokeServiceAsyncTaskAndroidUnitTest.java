@@ -7,6 +7,7 @@ import androidx.test.rule.ActivityTestRule;
 import com.manitos.dev.gpcendpoint.api.JokeServiceAsyncTask;
 
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -21,7 +22,7 @@ public class JokeServiceAsyncTaskAndroidUnitTest implements JokeServiceAsyncTask
 
     private static String jokeTextResult;
     private static boolean called;
-    private CountDownLatch signal;
+    private CountDownLatch signal = new CountDownLatch(1);
 
     /**
      * The ActivityTestRule is a rule provided by Android used for functional testing of a single
@@ -32,6 +33,11 @@ public class JokeServiceAsyncTaskAndroidUnitTest implements JokeServiceAsyncTask
      */
     @Rule
     public ActivityTestRule<MainActivity> activityTestRule = new ActivityTestRule(MainActivity.class);
+
+    @Before
+    public void setup() {
+        signal = new CountDownLatch(1);
+    }
 
     @Test
     public void testRetrieveJokeTaskLocal() throws Exception {
