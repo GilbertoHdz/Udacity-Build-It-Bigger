@@ -4,6 +4,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.os.Handler;
 
+import androidx.annotation.VisibleForTesting;
+
 import com.google.api.client.extensions.android.http.AndroidHttp;
 import com.google.api.client.extensions.android.json.AndroidJsonFactory;
 import com.google.api.client.googleapis.services.AbstractGoogleClientRequest;
@@ -20,6 +22,7 @@ import java.io.IOException;
  *
  *  Created by gilbertohdz on 02/05/20.
  */
+@VisibleForTesting
 public class JokeServiceAsyncTask extends AsyncTask<Context, Void, JokeServiceAsyncTask.Result> {
 
     private static final int JOKE_VALUE_FETCH_TIMEOUT = 5000;
