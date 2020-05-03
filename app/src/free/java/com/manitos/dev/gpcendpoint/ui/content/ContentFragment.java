@@ -42,7 +42,9 @@ public class ContentFragment extends Fragment {
     private void initializeInterstitial() {
         mInterstitialAd = new InterstitialAd(requireContext());
         mInterstitialAd.setAdUnitId(requireContext().getString(R.string.interstitial_ad_unit_id));
-        mInterstitialAd.loadAd(new AdRequest.Builder().build());
+        mInterstitialAd.loadAd(new AdRequest.Builder()
+                .addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+                .build());
         interstitialAdListeners();
     }
 
