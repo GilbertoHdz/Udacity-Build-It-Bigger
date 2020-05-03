@@ -25,7 +25,7 @@ import java.io.IOException;
 @VisibleForTesting
 public class JokeServiceAsyncTask extends AsyncTask<Context, Void, JokeServiceAsyncTask.Result> {
 
-    private static final int JOKE_VALUE_FETCH_TIMEOUT = 5000;
+    private static final int JOKE_VALUE_FETCH_TIMEOUT = 10000;
 
     private MyApi myApiService = null;
 
@@ -90,6 +90,7 @@ public class JokeServiceAsyncTask extends AsyncTask<Context, Void, JokeServiceAs
         try {
             return new Result(context, myApiService.getRandomJoke().execute().getData());
         } catch (IOException e) {
+            e.printStackTrace();
             return new Result(context, null);
         }
     }

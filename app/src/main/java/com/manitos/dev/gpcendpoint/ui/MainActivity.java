@@ -1,6 +1,8 @@
 package com.manitos.dev.gpcendpoint.ui;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -54,6 +56,14 @@ public class MainActivity extends AppCompatActivity implements JokeServiceAsyncT
         return super.onOptionsItemSelected(item);
     }
 
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        for (Fragment fragment : getSupportFragmentManager().getFragments()) {
+            fragment.onActivityResult(requestCode, resultCode, data);
+        }
+    }
+
     public void tellJoke(View view) {
         Toast.makeText(this, "derp", Toast.LENGTH_SHORT).show();
         checkNetworkConnectionAndGetJokeService();
@@ -92,9 +102,9 @@ public class MainActivity extends AppCompatActivity implements JokeServiceAsyncT
         _loader.setVisibility(View.GONE);
         _error_message.setVisibility(View.GONE);
 
-        Intent intent = new Intent(this, JokeDetailActivity.class);
+        Intent intent = new Intent(MainActivity.this, JokeDetailActivity.class);
         intent.putExtra(JokeDetailActivity.KEY_JOKE_GCP_RESULT, value);
-        this.startActivity(intent);
+        this.startActivityForResult(intent, JokeDetailActivity.KEY_ACTIVITY_RESULT);
     }
 
     private void showErrorMessage(int resMsgId) {
